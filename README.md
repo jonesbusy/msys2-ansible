@@ -14,8 +14,9 @@ You are also alergic to Putty and prefer the command line for SSH into your favo
 
 ### Requirement
 
-- Install [msys2](https://www.msys2.org/) on your local folder
-- Install python3 and pip3
+- Ansible >= 2.9
+- [msys2](https://www.msys2.org/) on your local folder
+- `python3` and `pip3` packages
 
 ```
 pacman -S ansible python3 python3-pip

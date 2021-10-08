@@ -4,7 +4,7 @@
 export ZSH="{{ ansible_user_dir }}/.oh-my-zsh"
 
 # ZSH config
-ZSH_THEME="flazz"
+ZSH_THEME="{{ zsh_theme }}"
 CASE_SENSITIVE="true"
 
 plugins=({{ zsh_plugins | join(' ') }})
@@ -16,7 +16,6 @@ export EDITOR='vim'
 
 # Java
 export PATH=$PATH:"/c/Program Files (x86)/Common Files/Oracle/Java/javapath"
-
 
 # Request CA bundle
 export SSL_CERT_FILE=/usr/ssl/certs/ca-bundle.crt

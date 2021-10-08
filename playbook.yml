@@ -16,7 +16,7 @@
       tags:
         - git
 
-    - name: Setup .zshrc
+    - name: Setup .zshrc template
       ansible.builtin.template:
         src: zshrc.j2
         dest: "{{ ansible_user_dir }}/.zshrc"
@@ -24,12 +24,34 @@
       tags:
         - zsh
 
+    - name: Ensure HTTP pie directory exist
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/httpie/"
+        state: directory
+      tags:
+        - templates
+
+    - name: Setup httpie template
+      ansible.builtin.template:
+        src: httpie_config.json.j2
+        dest: "{{ ansible_user_dir }}/.config/httpie/config.json"
+      tags:
+        - templates
+
     - name: Install system pacman packages
       pacman:
         name: "{{ pacman_packages }}"
         state: present
       tags:
         - packages
+        - system
+
+    - name: Install pip3 packages
+      pip:
+        name: "{{ pip_packages }}"
+      tags:
+        - packages
+        - pip
 
     - name: Perform system upgrade
       pacman:

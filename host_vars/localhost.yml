@@ -24,8 +24,14 @@ pacman_packages:
 zsh_plugins:
   - git
 
+# ZSH misc
 zsh_editor: vim
+zsh_theme: flazz
 
 # Extra PATH
 zsh_extra_paths:
   - /opt/maven/bin
+
+# Pip
+pip_packages:
+  - httpie
