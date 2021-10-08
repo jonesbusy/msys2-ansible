@@ -1,0 +1,39 @@
+- hosts: all
+  gather_facts: yes
+
+  handlers:
+    - name: Reload ZSH
+      ansible.builtin.command:
+        cmd: exec zsh
+      changed_when: true
+
+  tasks:
+
+    - name: Download git-prompt.sh
+      get_url:
+        url: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+        dest: "{{ ansible_user_dir }}/.git-prompt.sh"
+      tags:
+        - git
+
+    - name: Setup .zshrc
+      ansible.builtin.template:
+        src: zshrc.j2
+        dest: "{{ ansible_user_dir }}/.zshrc"
+      notify: Reload ZSH 
+      tags:
+        - zsh
+
+    - name: Install system pacman packages
+      pacman:
+        name: "{{ pacman_packages }}"
+        state: present
+      tags:
+        - packages
+
+    - name: Perform system upgrade
+      pacman:
+        update_cache: yes
+        upgrade: yes
+      tags:
+        - upgrade

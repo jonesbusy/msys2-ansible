@@ -1,0 +1,62 @@
+# {{ ansible_managed }}
+
+# Path to your oh-my-zsh installation.
+export ZSH="{{ ansible_user_dir }}/.oh-my-zsh"
+
+# ZSH config
+ZSH_THEME="flazz"
+CASE_SENSITIVE="true"
+
+plugins=({{ zsh_plugins | join(' ') }})
+
+source $ZSH/oh-my-zsh.sh
+source ~/.git-prompt.sh
+
+export EDITOR='vim'
+
+# Java
+export PATH=$PATH:"/c/Program Files (x86)/Common Files/Oracle/Java/javapath"
+
+
+# Request CA bundle
+export SSL_CERT_FILE=/usr/ssl/certs/ca-bundle.crt
+export REQUESTS_CA_BUNDLE=/usr/ssl/certs/ca-bundle.crt
+
+# Locale
+LANG={{ shell_locale }}
+LC_CTYPE="{{ shell_locale }}"
+LC_NUMERIC="{{ shell_locale }}"
+LC_TIME="{{ shell_locale }}"
+LC_COLLATE="{{ shell_locale }}"
+LC_MONETARY="{{ shell_locale }}"
+LC_MESSAGES="{{ shell_locale }}"
+LC_ALL=
+
+# Prompt config
+CARETCOLOR=magenta
+PROMPT='%{${fg[cyan]}%}%n@%m%{${fg_bold[magenta]}%}:%{$reset_color%}%3~%{$fg_bold[cyan]%}$(__git_ps1 " (%s)") %{${fg_bold[$CARETCOLOR]}%}$%{${reset_color}%} '
+RPROMPT='%{$fg[white]%}[%?][%l][%*]%{$reset_color%}'
+
+GIT_PS1_SHOWUPSTREAM=verbose
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWCOLORHINTS=1
+
+# MinGW path
+export PATH=$PATH:/mingw64/bin:/mingw32/bin
+
+# Other paths
+{% for extra_path in zsh_extra_paths %}
+export PATH=$PATH:{{ extra_path }}
+{% endfor %}
+
+# Autojump config
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd (){
+  emulate -L zsh
+  ajmp update "$pwd"
+}
+j(){
+  cd "$(ajmp complete $@)"
+} 

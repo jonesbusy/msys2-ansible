@@ -1,0 +1,31 @@
+ansible_connection: local
+ansible_interpreter: /usr/bin/python3
+
+# Localisation
+shell_locale: en_US.UTF-8
+
+# Pip packages
+pip_packages:
+  - autojmp
+  - ansible-lint[yamllint]
+
+# Packman packages
+pacman_packages:
+  - openssh
+  - openssl-devel
+  - libyaml-devel
+  - gcc
+  - make
+  - unzip
+  - vim
+  - mingw-w64-i686-jq
+
+# List of ZSH plugins
+zsh_plugins:
+  - git
+
+zsh_editor: vim
+
+# Extra PATH
+zsh_extra_paths:
+  - /opt/maven/bin
