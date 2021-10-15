@@ -22,6 +22,9 @@ export PATH=$PATH:"/c/Program Files (x86)/Common Files/Oracle/Java/javapath"
 export SSL_CERT_FILE=/usr/ssl/certs/ca-bundle.crt
 export REQUESTS_CA_BUNDLE=/usr/ssl/certs/ca-bundle.crt
 
+# Windows link (fix tar : https://github.com/msys2/MSYS2-packages/issues/1216)
+export MSYS=winsymlinks:lnk
+
 # Locale
 LANG={{ shell_locale }}
 LC_CTYPE="{{ shell_locale }}"
