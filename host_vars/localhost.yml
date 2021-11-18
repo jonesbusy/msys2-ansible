@@ -8,6 +8,7 @@ shell_locale: en_US.UTF-8
 pip_packages:
   - autojmp
   - python-tss-sdk
+  - pywinrm
   - ansible-lint[yamllint]
 
 # Packman packages
@@ -22,6 +23,9 @@ pacman_packages:
   - tar
   - msys/p7zip
   - mingw-w64-i686-jq
+  - mingw-w64-x86_64-gss
+  - mingw-w64-i686-python-gssapi
+  - mingw-w64-x86_64-python-gssapi
 
 # List of ZSH plugins
 zsh_plugins:
